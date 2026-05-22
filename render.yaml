@@ -1,9 +1,9 @@
 services:
-  # 1. Back-end Service (Spring Boot)
+  # 1. Back-end Service (Spring Boot API)
   - type: web
     name: petstore-api
-    runtime: docker # Highly recommended for Spring Boot projects
-    repo: https://github.com/sigesigepoh/PetStore # Update this link
+    runtime: docker
+    repo: https://github.com/sigesigepoh/PetStore
     plan: free
     rootDir: backend
     envVars:
@@ -29,11 +29,12 @@ services:
         fromDatabase:
           name: petstore-db
           property: password
+
   # 2. Front-end Service (React Static Site)
   - type: web
     name: petstore-web
     runtime: static
-    repo: https://github.com/sigesigepoh/PetStore # Update this link
+    repo: https://github.com/sigesigepoh/PetStore
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
@@ -42,7 +43,6 @@ services:
         source: /*
         destination: /index.html
 
-# 3. Managed PostgreSQL Database
 databases:
   - name: petstore-db
     plan: free
