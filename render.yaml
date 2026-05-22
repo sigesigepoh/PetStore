@@ -9,11 +9,16 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      # This automatically pulls the connection string from your managed database service below
       - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://${PETSTORE_DB_HOST}:${PETSTORE_DB_PORT}/${PETSTORE_DB_DATABASE}?sslmode=require
+      - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: petstore-db
-          property: connectionString
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: petstore-db
+          property: password
 
   # 2. Front-end Service (React Static Site)
   - type: web
