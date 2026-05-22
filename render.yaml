@@ -21,7 +21,6 @@ services:
     name: petstore-web
     runtime: static
     repo: https://github.com/sigesigepoh/PetStore # Update this link
-    plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
