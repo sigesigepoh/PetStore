@@ -5,11 +5,8 @@ WORKDIR /app
 # Copy all project files directly
 COPY . .
 
-# Ensure the Maven wrapper script has execution rights
-RUN chmod +x mvnw
-
-# Compile and package the executable jar (skipping test suites for speed)
-RUN ./mvnw clean package -DskipTests
+# Compile and package the executable jar using global maven
+RUN mvn clean package -DskipTests
 
 # Run Stage
 FROM eclipse-temurin:17-jre-jammy
