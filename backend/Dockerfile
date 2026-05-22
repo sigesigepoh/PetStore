@@ -2,16 +2,13 @@
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy the build configuration files
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
+# Copy all project files directly
+COPY . .
 
-# Ensure the Maven wrapper has execution permissions
+# Ensure the Maven wrapper script has execution rights
 RUN chmod +x mvnw
 
-# Copy source code and build the production jar file
-COPY src src
+# Compile and package the executable jar (skipping test suites for speed)
 RUN ./mvnw clean package -DskipTests
 
 # Run Stage
@@ -20,5 +17,4 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 
-# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
