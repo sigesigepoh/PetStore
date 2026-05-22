@@ -9,8 +9,18 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://${PETSTORE_DB_HOST}:${PETSTORE_DB_PORT}/${PETSTORE_DB_DATABASE}?sslmode=require
+      - key: DB_HOST
+        fromDatabase:
+          name: petstore-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: petstore-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: petstore-db
+          property: database
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: petstore-db
@@ -19,7 +29,6 @@ services:
         fromDatabase:
           name: petstore-db
           property: password
-
   # 2. Front-end Service (React Static Site)
   - type: web
     name: petstore-web
