@@ -27,8 +27,8 @@ services:
     staticPublishPath: dist
     routes:
       - type: rewrite
-        src: /*
-        dest: /index.html
+        source: /*
+        destination: /index.html
 
 # 3. Managed PostgreSQL Database
 databases:
