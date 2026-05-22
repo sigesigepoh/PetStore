@@ -20,7 +20,7 @@ services:
   - type: web
     name: petstore-web
     runtime: static
-    repo: https://github.com/YOUR_USERNAME/YOUR_REPO_NAME # Update this link
+    repo: https://github.com/sigesigepoh/PetStore # Update this link
     plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
